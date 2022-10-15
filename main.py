@@ -4,10 +4,10 @@ import sys
 from disnake.ext import commands
 
 # required setup
-
 intents = disnake.Intents.default()
 intents.message_content = True
 client = commands.Bot(command_prefix=commands.when_mentioned_or("!"), intents=intents)
+global rcount
 
 
 @client.event
@@ -53,20 +53,27 @@ async def on_message(message):
         await gamemessage.add_reaction("🧻")
             
 
-    if str(message.author) == 'disborbrob#0650':
-        name = str(message.author)
-        name = ''.join(name.split())[:-5]
-        await message.reply('Is this ' + name + '?', mention_author=True)
-
-    if message.content == 'test':
-        message = await message.channel.send('pls work???')
-        disnake.ui.View("YES IT WORKS")
-
-    async def delete(ctx: commands.Context):
-        msg = await ctx.channel.send("I will delete myself now...")
-        await msg.delete()
-
+    if str(message.author) == 'disborbrob#0650': # react to this bot
+        if rcount/5 == 0:
+            rcount = 0
+            name = str(message.author)
+            name = ''.join(name.split())[:-5]
+            await message.reply('Is this ' + name + '?', mention_author=True)
+        else:
+            rcount = rcount + 1
     
+    if message.content.startswith('repeat '):
+        messagetosend = message.content[7:]
+        await message.channel.send(messagetosend)
+
+@client.command()
+async def send_button(ctx: commands.Context):
+    await ctx.send(
+        "Here's a button!",
+        components=disnake.ui.Button(label="Click me!", custom_id="cool_button"),
+    )
+
+
     #async def on_reaction_add(reaction, user):
     #    if str(user) == str(self.user):
     #        return 0
