@@ -45,6 +45,14 @@ class discorBot2(disnake.Client):
             await gamemessage.add_reaction("🪨")
             await gamemessage.add_reaction("✂️")
             await gamemessage.add_reaction("🧻")
+        
+        
+
+    #async def on_reaction_add(reaction, user):
+    #    if str(user) == str(self.user):
+    #        return 0
+    #    print(user)
+    #    print(reaction)
 
 # required setup
 
