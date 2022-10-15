@@ -52,5 +52,20 @@ intents = disnake.Intents.default()
 intents.message_content = True
 client = discorBot2(intents=intents)
 
+def write_read_tk(option, token,): # write or read token from token file
+    if option:
+        file = open(sys.path[0] + "/token", "w")
+        file.write(token)
+        file.close()
+        return 0
+    else:
+        file = open(sys.path[0] + "/token", "r")
+        token = file.read()
+        file.close()
+        return token
+
 if __name__ == "__main__": # run the bot
-    client.run('Nzc0OTQ4MTE1NzIzNDUyNDE2.GImL21.14lgkyMPQalOCMNQktGFKMrmxoiolg5hWC6WZk')
+    try:
+        client.run(str(write_read_tk(False,0)))
+    except:
+        client.run(str(write_read_tk(True, str(input("token: ")))))
