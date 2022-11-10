@@ -41,10 +41,11 @@ async def on_message(message):
         name = ''.join(name.split())[:-5] # remove the last 5 characters from name
         await message.channel.send('I fucking knew it ' + name + ', you fucking did it you madman')
         
-    if message.content == 'restart': # TODO try to create another process that starts this process again
-        if str(message.author) == "supermikea#5051":
-            await message.channel.send('This still needs to be finished')
-        
+    if (
+        message.content == 'restart'
+        and str(message.author) == "supermikea#5051"
+    ):
+        await message.channel.send('This still needs to be finished')
     if message.content == 'rps':
         comp_choice = random.randint(0, 3)
         gamemessage = await message.channel.send('What will you choose?')
